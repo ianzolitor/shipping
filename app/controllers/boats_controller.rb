@@ -2,11 +2,9 @@ class BoatsController < ApplicationController
   def index
       boats = Boat.all
       boats_json = boats.as_json
-
       boats_json.each_with_index do |boat, index|
           boat[:jobs] = boats[index].jobs
       end
-
       render json: boats_json
   end
 
@@ -15,8 +13,13 @@ class BoatsController < ApplicationController
 
   def create
     boat=Boat.new(boat_params)
-      if boat.save!
-        render json: Boat.all
+    if boat.save!
+        boats = Boat.all
+        boats_json = boats.as_json
+        boats_json.each_with_index do |boat, index|
+        boat[:jobs] = boats[index].jobs
+        end
+        render json: boats_json
     end
   end
 
