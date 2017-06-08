@@ -4,7 +4,7 @@ class BoatsController < ApplicationController
       boats_json = boats.as_json
 
       boats_json.each_with_index do |boat, index|
-          boat[:jobs] = boats[index].jobs.map(&:name)
+          boat[:jobs] = boats[index].jobs
       end
 
       render json: boats_json
